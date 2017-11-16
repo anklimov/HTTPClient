@@ -24,7 +24,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#if defined(__AVR__)
 #include <avr/pgmspace.h>
+#endif
 #include <HardwareSerial.h>
 #include "HTTPClient.h"
 
