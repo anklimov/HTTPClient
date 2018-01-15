@@ -24,9 +24,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #if defined(__AVR__)
 #include <avr/pgmspace.h>
+#else
+#define _BV(bit) (1 << (bit))
+#define fdev_get_udata(stream) NULL
+#define fdev_set_udata(stream,u) NULL
+#define fprintf_P fprintf
+#define fdevopen fopen
+
+#define fscanf_P(a,b,c) fscanf(a,b,c)
 #endif
+
 #include <HardwareSerial.h>
 #include "HTTPClient.h"
 
@@ -54,6 +64,13 @@ HTTPClient::HTTPClient(char* host, uint8_t* ip, uint16_t port) :
 {
   //nothing else to do
 }
+
+HTTPClient::HTTPClient(char* host, uint16_t port) :
+    EthernetClient(), hostName(host), debugCommunication(0), ip(NULL), port(port)
+{
+  //nothing else to do
+}
+
 
 FILE*
 HTTPClient::getURI(char* uri)
@@ -190,7 +207,11 @@ HTTPClient::openClientFile()
     {
       stop();
     }
-  if (connect(ip,port))
+///    
+  int res;    
+  if (ip) res=connect(ip,port); else res=connect(hostName,port);   
+      
+  if (res)
     {
       return result;
     }

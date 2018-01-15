@@ -62,6 +62,8 @@ public:
    */
   HTTPClient(char* host, uint8_t* ip, uint16_t port);
 
+  HTTPClient(char* host, uint16_t port=80);
+
   /*
    * Post a GET request to the server.
    * The result is a file handle or null is an error occured.
