@@ -26,7 +26,12 @@
 #define HTTPCLIENT_H_
 
 #include <inttypes.h>
+
+#ifdef Wiz5500
+#include <EthernetClient2.h>
+#else
 #include <EthernetClient.h>
+#endif
 
 /* With this we try a delay of 20 ms before checking again if content is available
  * and we try this up to 50 times.
@@ -47,7 +52,7 @@ typedef struct
 /*
  * The HTTP client is basically a Ethernet client with some additional functions. The functions
  * of the Ethernet client are not accessible.
- * To construct a HTTP client you have to provide the IP AND the name of the server – else
+ * To construct a HTTP client you have to provide the IP AND the name of the server √ê else
  * the virtual host management of most internet servers will fail. Sorry for the inconvenience.
  */
 class HTTPClient : private EthernetClient
