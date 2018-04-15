@@ -26,12 +26,12 @@
 #define HTTPCLIENT_H_
 
 #include <inttypes.h>
-
-#ifdef Wiz5500
-#include <EthernetClient2.h>
-#else
+//#define Wiz
+//#ifdef Wiz5500
+//#include <EthernetClient2.h>
+//#else
 #include <EthernetClient.h>
-#endif
+//#endif
 
 /* With this we try a delay of 20 ms before checking again if content is available
  * and we try this up to 50 times.

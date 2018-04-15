@@ -210,8 +210,8 @@ HTTPClient::openClientFile()
 ///    
   int res;    
   if (ip) res=connect(ip,port); else res=connect(hostName,port);   
-      
-  if (res)
+//    Serial.println(res);  
+  if (res>0)
     {
       return result;
     }
