@@ -473,8 +473,11 @@ HTTPClient::closeStream(FILE* stream)
   if (stream != NULL)
     {
       http_stream_udata* udata = (http_stream_udata*) fdev_get_udata(stream);
-	  udata->client->stop();
+      if (udata) 
+      {
+      if (udata->client) udata->client->stop();
       free(udata);
+      }
       fclose(stream);
     }
 }
